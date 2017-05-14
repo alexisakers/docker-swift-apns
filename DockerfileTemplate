@@ -1,0 +1,52 @@
+FROM swift:{SWIFT_VERSION}
+
+# Install dependencies
+RUN apt-get autoremove -y curl \
+                          libcurl-dev \
+                          libcurl4-openssl-dev
+
+RUN apt-get -q update && \
+    apt-get -q install -y \
+    wget \
+    g++ \
+    make \
+    binutils \
+    autoconf \
+    automake \
+    autotools-dev \
+    libtool \
+    pkg-config \
+    zlib1g-dev \
+    libssl-dev \
+    libxml2-dev
+
+RUN mkdir /deps && cd /deps
+
+# Build libnghttp2
+RUN git clone https://github.com/nghttp2/nghttp2 && \
+    cd nghttp2 && \
+    git checkout tags/{HTTP2_VERSION} && \
+    autoreconf -i && \
+    automake && \
+    autoconf && \
+    ./configure && \
+    make && \
+    make install
+
+RUN cd /deps
+
+# Build libcurl with HTTP/2
+RUN wget http://curl.haxx.se/download/curl-{CURL_VERSION}.tar.bz2 && \
+    tar -xvjf curl-{CURL_VERSION}.tar.bz2 && \
+    cd curl-{CURL_VERSION} && \
+    ./configure --with-nghttp2 --with-ssl && \
+    make && \
+    make install && \
+    ldconfig
+
+# Cleanup
+WORKDIR /
+RUN rm -rf /deps
+
+# Print Installed CURL Version
+RUN curl --version
