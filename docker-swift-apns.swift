@@ -156,6 +156,7 @@ extension CommandLine {
         print("\t --curl=<curl version> \t The version of libcurl to bundle in the image")
         print("\t --nghttp2=<nghttp2 version> \t The version of libnghttp2 to bundle in the image")
         print("\t --swift=<swift version> \t The version of the Swift language to bundle in the image")
+        print("\t --tag=<image tag> \t The tag to use to identify the image")
 
         print()
         print("🌍  For more information, visit https://github.com/alexaubry/swift-apns-docker")

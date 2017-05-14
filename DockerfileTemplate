@@ -3,10 +3,12 @@ FROM swift:{SWIFT_VERSION}
 # Install dependencies
 RUN apt-get autoremove -y curl \
                           libcurl-dev \
+                          libcurl3-gnutls \
                           libcurl4-openssl-dev
 
 RUN apt-get -q update && \
     apt-get -q install -y \
+    git \
     wget \
     g++ \
     make \
@@ -20,10 +22,11 @@ RUN apt-get -q update && \
     libssl-dev \
     libxml2-dev
 
-RUN mkdir /deps && cd /deps
+RUN mkdir /dependencies
 
 # Build libnghttp2
-RUN git clone https://github.com/nghttp2/nghttp2 && \
+RUN cd /dependencies && \
+    git clone https://github.com/nghttp2/nghttp2 && \
     cd nghttp2 && \
     git checkout tags/{HTTP2_VERSION} && \
     autoreconf -i && \
@@ -33,20 +36,20 @@ RUN git clone https://github.com/nghttp2/nghttp2 && \
     make && \
     make install
 
-RUN cd /deps
-
 # Build libcurl with HTTP/2
-RUN wget http://curl.haxx.se/download/curl-{CURL_VERSION}.tar.bz2 && \
-    tar -xvjf curl-{CURL_VERSION}.tar.bz2 && \
+RUN cd /dependencies && \
+    wget https://curl.haxx.se/download/curl-{CURL_VERSION}.tar.gz && \
+    tar -xf curl-{CURL_VERSION}.tar.gz && \
     cd curl-{CURL_VERSION} && \
-    ./configure --with-nghttp2 --with-ssl && \
+    sed -i -e "s/CURL_@CURL_LT_SHLIB_VERSIONED_FLAVOUR@4/CURL_@CURL_LT_SHLIB_VERSIONED_FLAVOUR@3/g" lib/libcurl.vers.in && \
+    ./configure --with-nghttp2 --with-ssl --enable-versioned-symbols && \
     make && \
     make install && \
     ldconfig
 
 # Cleanup
 WORKDIR /
-RUN rm -rf /deps
+RUN rm -rf /dependencies
 
-# Print Installed CURL Version
+# Print cURL Version
 RUN curl --version
