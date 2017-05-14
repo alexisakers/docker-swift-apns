@@ -1,0 +1,18 @@
+language: generic
+sudo: required
+dist: trusty
+env:
+    global:
+        - SWIFT_VERSION=swift-3.1.1-release
+    matrix:
+        - IMAGE_CURL="7.54.0" IMAGE_HTTP2="v1.22.0" IMAGE_SWIFT="3.0.2"
+        - IMAGE_CURL="7.54.0" IMAGE_HTTP2="v1.22.0" IMAGE_SWIFT="3.1.0"
+    
+install:
+    - bash ./.ci/install.sh
+    
+before_script:
+    - export IMAGE_TAG=aleksaubry/swift-apns:$IMAGE_SWIFT
+    
+script:
+    - docker-swift-apns --curl=$IMAGE_CURL --nghttp2=$IMAGE_HTTP2 --swift=$IMAGE_SWIFT --tag=$IMAGE_TAG
