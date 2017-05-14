@@ -12,5 +12,6 @@ swift build -c release
 cp -f .build/release/Marathon /usr/local/bin/marathon
 
 echo "👉  Installing Build Script"
+mv Marathonfile Marathonfile.bak
 marathon install https://raw.githubusercontent.com/JohnSundell/Files/master/Sources/Files.swift
 marathon install docker-swift-apns /usr/local/docker-swift-apns
