@@ -1,9 +1,8 @@
 #!/bin/bash
 
 echo "👉  Installing Swift"
-mkdir swift
-curl https://swift.org/builds/$SWIFT_VERSION/ubuntu1404/$SWIFT_VERSION/$SWIFT_VERSION-ubuntu14.04.tar.gz | tar xz -C swift &> /dev/null
-export PATH=$(pwd)/swift/$SWIFT_VERSION-ubuntu14.04/usr/bin:$PATH
+eval "$(curl -sL https://apt.vapor.sh)"
+sudo apt-get install vapor
 
 echo "👉  Installing Marathon"
 git clone https://github.com/JohnSundell/Marathon.git
