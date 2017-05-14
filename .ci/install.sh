@@ -6,7 +6,7 @@ curl https://swift.org/builds/$SWIFT_VERSION/ubuntu1404/$SWIFT_VERSION/$SWIFT_VE
 export PATH=$(pwd)/swift/$SWIFT_VERSION-ubuntu14.04/usr/bin:$PATH
 
 echo "👉  Installing Marathon"
-git clone git@github.com:JohnSundell/Marathon.git
+git clone https://github.com/JohnSundell/Marathon.git
 cd Marathon
 swift build -c release
 cp -f .build/release/Marathon /usr/local/bin/marathon
