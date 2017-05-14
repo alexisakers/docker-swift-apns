@@ -200,7 +200,7 @@ extension CommandLine {
 // MARK: - Dockerfile
 
 func createDockerfile(in workingDirectory: Folder,
-                      with arguments: BuildArguments) throws {
+                      with arguments: BuildArguments) throws -> File {
 
     let template = try workingDirectory.file(named: "DockerfileTemplate")
 
@@ -211,6 +211,8 @@ func createDockerfile(in workingDirectory: Folder,
 
     let dockerfile = try workingDirectory.createFileIfNeeded(withName: "Dockerfile")
     try dockerfile.write(string: body)
+
+    return dockerfile
 
 }
 
@@ -250,12 +252,14 @@ do {
     let imageName = buildArgs.imageTag
 
     print("👉  Creating Dockerfile")
-    try createDockerfile(in: workingDirectory, with: buildArgs)
+    let dockerFile = try createDockerfile(in: workingDirectory, with: buildArgs)
 
     print("👉  Building Docker image '\(imageName)'")
 
     try execute(bashCommand: "docker",
                 arguments: ["build", ".", "-t", buildArgs.imageTag]) 
+
+    try dockerFile.delete()
 
     print("✅  Swift APNS image '\(imageName)' successfully built!")
 
