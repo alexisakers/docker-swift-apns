@@ -2,8 +2,8 @@
 
 echo "👉  Installing Swift"
 eval "$(curl -sL https://apt.vapor.sh)"
-sudo apt-get install vapor
-sudo chmod -R a+x /usr/
+sudo apt-get install swift
+sudo chmod -R a+rx /usr/
 
 echo "👉  Installing Marathon"
 git clone https://github.com/JohnSundell/Marathon.git
