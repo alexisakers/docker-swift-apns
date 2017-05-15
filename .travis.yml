@@ -12,3 +12,9 @@ install:
 script:
     - docker-swift-apns build --curl=$CURL --nghttp2=$HTTP2 --swift=$SWIFT --tag=$TAG
     - bash ./.ci/test-suite.sh
+    
+deploy:
+    provider: script
+    script: bash ./.ci/release.sh
+    on:
+        branch: release
