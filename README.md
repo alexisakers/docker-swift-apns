@@ -10,7 +10,7 @@ These images are compatible with any environment supporting Docker, including [H
 
 ## Contents
 
-The images come with:
+Each image comes with:
 
 - Ubuntu 16.04
 - Swift (from on the [official Docker image](https://hub.docker.com/_/swift/))
