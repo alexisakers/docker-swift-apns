@@ -3,5 +3,5 @@ Dockerfile
 *.xcodeproj
 .build
 Packages
-Dockerfile-e
+*-e
 Package.pins
