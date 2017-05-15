@@ -3,11 +3,12 @@ sudo: required
 dist: trusty
 
 env:
-    - CURL="7.54.0" HTTP2="v1.22.0" SWIFT="3.0.2" TAG="aleksaubry/swift-apns:3.0.2"
-    - CURL="7.54.0" HTTP2="v1.22.0" SWIFT="3.1.0" TAG="aleksaubry/swift-apns:3.1.0"
+    - CURL="7.54.0" HTTP2="v1.22.0" SWIFT="3.0.2" TAG="aleksaubry/swift-apns:3.0.2" TEST_TAG=TAG="aleksaubry\/swift-apns:3.0.2"
+    - CURL="7.54.0" HTTP2="v1.22.0" SWIFT="3.1.0" TAG="aleksaubry/swift-apns:3.1.0" TEST_TAG=TAG="aleksaubry\/swift-apns:3.1.0"
 
 install:
     - bash ./.ci/install.sh
 
 script:
     - docker-swift-apns build --curl=$CURL --nghttp2=$HTTP2 --swift=$SWIFT --tag=$TAG
+    - bash ./.ci/test-suite.sh
