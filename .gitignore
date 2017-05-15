@@ -1,7 +1,7 @@
 .DS_Store
-Dockerfile
+./Dockerfile
 *.xcodeproj
 .build
 Packages
-*-e
+Dockerfile-e
 Package.pins
