@@ -20,6 +20,8 @@ These images are compatible with any environment supporting Docker, including [H
 | aleksaubry/swift-apns:3.0.2 | 3.0.2 | 7.54.0  | 1.22.0     |
 | aleksaubry/swift-apns:3.1.0 | 3.1.0 | 7.54.0  | 1.22.0     |
 
+&#x1F30E;  You can visit the project's Docker Hub repo here: https://hub.docker.com/r/aleksaubry/swift-apns/ 
+
 ## Docker Instructions
 
 Getting started with the Swift APNS images is very easy!
