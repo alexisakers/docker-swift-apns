@@ -288,7 +288,7 @@ do {
 
     try dockerFile.delete()
 
-    print("✅  Swift APNS image '\(imageName)' successfully built!")
+    print("✅  Swift APNS image '\(imageName)' built successfully!")
 
 } catch {
     CommandLine.fail(error: error)
