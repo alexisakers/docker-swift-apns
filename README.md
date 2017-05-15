@@ -10,7 +10,7 @@ These images are compatible with any environment supporting Docker, including [H
 
 ## Contents
 
-- Swift (from the [official Docker image](https://hub.docker.com/_/swift/))
+- Swift (based on the [official Docker image](https://hub.docker.com/_/swift/))
 - `libcurl` compiled with HTTP/2 support
 
 ## Images
@@ -24,7 +24,7 @@ These images are compatible with any environment supporting Docker, including [H
 
 Getting started with the Swift APNS images is very easy!
 
-Just specify one of the image tags listed above as the base image image in your project's Dockerfile:
+Just set an image tag listed above to the base image in your project's Dockerfile:
 
 ```dockerfile
 FROM aleksaubry/swift-apns:<version>
