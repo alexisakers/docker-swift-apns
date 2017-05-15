@@ -1,5 +1,4 @@
 import CCurl
-import ShellOut
 import Foundation
 
 ///

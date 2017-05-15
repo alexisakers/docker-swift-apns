@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 echo "👉  Running Test Suite";
 sed -i -e "s/{IMAGE_TAG}/$TEST_TAG/g" TestSuite/Dockerfile;
 docker build -t "dsa-tests" TestSuite;
