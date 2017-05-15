@@ -1,4 +1,4 @@
-import PackageDescrition
+import PackageDescription
 
 let package = Package(
     name: "dsa",
