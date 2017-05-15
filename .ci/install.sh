@@ -6,8 +6,9 @@ sudo apt-get install swift
 sudo chmod -R a+rx /usr/
 
 echo "👉  Installing Marathon"
-git clone https://github.com/JohnSundell/Marathon.git
+git clone https://github.com/JohnSundell/Marathon.git 
 cd Marathon
+sed -i -e "s/git@github.com:johnsundell/https:\/\/github.com\/johnsundell/g" Package.swift
 swift build -c release
 cp -f .build/release/Marathon /usr/local/bin/marathon
 
