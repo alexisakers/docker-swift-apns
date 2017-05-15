@@ -16,5 +16,6 @@ script:
 deploy:
     provider: script
     script: bash ./.ci/release.sh
+    skip_cleanup: true
     on:
         branch: release
