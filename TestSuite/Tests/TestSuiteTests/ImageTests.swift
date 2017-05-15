@@ -10,17 +10,17 @@ class ImageTests: XCTestCase {
 
     let imageTools = ImageTools()
 
-    /// Checks that the installed CURL is at least 7.51.0.
+    /// Checks that libcurl has a version equal or greater than 7.51.0.
     func testCURLVersion() {
         XCTAssertTrue(imageTools.cURLVersion >= "7.51.0")
     }
 
-    /// Checks that CURL supports HTTP/2.
+    /// Checks that libcurl supports HTTP/2.
     func testHTTP2Support() {
         XCTAssertTrue(imageTools.hasHTTP2Support)
     }
 
-    /// Tests that HTTP/2 requests are sent.
+    /// Checks that HTTP/2 requests succeed.
     func testSendHTTP2Request() {
 
         let curlHandle = curl_easy_init()

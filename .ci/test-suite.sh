@@ -1,15 +1,18 @@
 #!/bin/bash
 set -e
 
-echo "👉  Running Test Suite";
-sed -i -e "s/{IMAGE_TAG}/$TEST_TAG/g" TestSuite/Dockerfile;
-docker build -t "dsa-tests" TestSuite;
-docker run "dsa-tests";
+echo "👉  Building Test Image"
+sed -i -e "s/{IMAGE_TAG}/$TEST_TAG/g" TestSuite/Dockerfile
+docker build TestSuite -t tests
 
-DYLIBS_VERSIONS=$(docker run 'dsa-tests' bash -c 'ldd /usr/lib/swift/linux/libFoundation.so');
-if [[ $DYLIBS_VERSIONS == *"no version information available"* ]]; then
+echo "👉  Running Test Suite"
+docker run tests
+
+echo "👉  Verifying Dependencies Graph"
+DEPENDENCIES_VERSIONS=$(docker run tests bash -c 'ldd /usr/lib/swift/linux/libFoundation.so')
+if [[ $DEPENDENCIES_VERSIONS == *"no version information available"* ]]; then
     echo "💥  No version information available for libcurl."
-    exit 1;
+    exit 1
 fi
 
-echo "✅  All tests passed."
+echo "✅  All tests passed"

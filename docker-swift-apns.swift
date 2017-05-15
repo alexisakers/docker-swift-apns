@@ -5,6 +5,7 @@ import Files
 
 extension String {
 
+    /// Extracts the value in the flag.
     func value(forFlag flag: String) -> String? {
 
         guard let flagMarkerRange = range(of: "--") else {
@@ -29,6 +30,7 @@ extension String {
 
 extension Pipe {
 
+    /// Get the text from the file handle.
     func readText() -> String? {
         let data = fileHandleForReading.readDataToEndOfFile()
         return String(data: data, encoding: .utf8)
@@ -39,6 +41,10 @@ extension Pipe {
 
 // MARK: - Model
 
+///
+/// The errors that can occur when building the image.
+///
+
 enum BuildError: Error {
 
     case invalidArguments
@@ -46,6 +52,7 @@ enum BuildError: Error {
     case invalidCommand(String)
     case dockerError(String)
 
+    /// The message to print.
     var message: String {
 
         switch self {
@@ -65,6 +72,7 @@ enum BuildError: Error {
 
     }
 
+    /// Whether the script should print the CLI usage on failure.
     var shouldPrintUsage: Bool {
 
         switch self {
@@ -76,6 +84,7 @@ enum BuildError: Error {
 
     }
 
+    /// Additionnal logging informations for debugging.
     var log: String? {
 
         switch self {
@@ -89,11 +98,24 @@ enum BuildError: Error {
 
 }
 
+///
+/// The informations necessary to build an image.
+///
+
 struct BuildArguments {
+    
+    /// The version of libcurl to vendor.
     let curlVersion: String
+    
+    /// The version of libnghttp2 to vendor.
     let nghttp2Version: String
+    
+    /// The version of Swift to use.
     let swiftVersion: String
+    
+    /// The Docker tag to associate with the built image.
     let imageTag: String
+    
 }
 
 
@@ -101,6 +123,7 @@ struct BuildArguments {
 
 extension CommandLine {
 
+    /// Get the build arguments from argv.
     static func parseArguments() throws -> BuildArguments {
 
         guard arguments.count >= 6 else {
@@ -141,6 +164,7 @@ extension CommandLine {
 
     }
 
+    /// Prints the usage of the script.
     static func printUsage() {
 
         print()
@@ -163,6 +187,7 @@ extension CommandLine {
 
     }
 
+    /// Prints an error and exit with a 1 code.
     static func fail(error: Error) {
 
         var shouldPrintUsage = true
@@ -199,6 +224,7 @@ extension CommandLine {
 
 // MARK: - Dockerfile
 
+/// Creates a Dockerfile appropriate for the specified build arguments.
 func createDockerfile(in workingDirectory: Folder,
                       with arguments: BuildArguments) throws -> File {
 
@@ -216,6 +242,7 @@ func createDockerfile(in workingDirectory: Folder,
 
 }
 
+/// Executes a bash command and throws on failure.
 func execute(bashCommand: String, arguments: [String]) throws {
 
     let args = arguments.joined(separator: " ")

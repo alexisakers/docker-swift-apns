@@ -14,3 +14,5 @@ swift build -c release --chdir docker-swift-apns
 
 echo "👉  Installing Build Script"
 cp -f docker-swift-apns/.build/release/docker-swift-apns /usr/local/bin/docker-swift-apns
+
+echo "✅  All dependencies installed successfully"
