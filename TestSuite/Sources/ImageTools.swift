@@ -31,24 +31,4 @@ struct ImageTools {
 
     }
 
-    /// Determines whether libFoundation reports that some version info are missing.
-    var hasMissingVersionInfo: Bool {
-
-        #if os(Linux)
-            let command = ["ldd '/usr/lib/swift/linux/libFoundation.so'"]
-
-        #else
-            let command = ["otool -L '/System/Library/Frameworks/Foundation.framework/Foundation'"]
-        #endif
-
-        let errorMessage = "no version information available"
-
-        guard let output = try? shellOut(to: command) else {
-            return true
-        }
-
-        return output.contains(errorMessage)
-
-    }
-
 }

@@ -20,11 +20,6 @@ class ImageTests: XCTestCase {
         XCTAssertTrue(imageTools.hasHTTP2Support)
     }
 
-    /// Checks that Fondation does not report missing version info.
-    func testMissingVersionInfo() {
-        XCTAssertFalse(imageTools.hasMissingVersionInfo)
-    }
-
     /// Tests that HTTP/2 requests are sent.
     func testSendHTTP2Request() {
 
@@ -67,7 +62,6 @@ class ImageTests: XCTestCase {
     static var allTests = [
         ("testCURLVersion", testCURLVersion),
         ("testHTTP2Support", testHTTP2Support),
-        ("testFoundationLinking", testMissingVersionInfo),
         ("testSendHTTP2Request", testSendHTTP2Request)
     ]
 
