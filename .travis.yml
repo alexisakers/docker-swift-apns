@@ -6,7 +6,6 @@ env:
     - CURL="7.54.0" HTTP2="v1.22.0" SWIFT="3.1.0"
     
 install:
-    - bash ./.ci/ssh.sh
     - bash ./.ci/install.sh
     
 before_script:
