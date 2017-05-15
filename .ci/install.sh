@@ -3,6 +3,7 @@ echo "👉  Installing Swift"
 eval "$(curl -sL https://apt.vapor.sh)"
 sudo apt-get install swift
 sudo chmod -R a+rx /usr/
+sudo chmod -R a+rwx /usr/local/
 
 echo "👉  Creating Package"
 mkdir docker-swift-apns
