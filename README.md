@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/alexaubry/docker-swift-apns/master/.github/apns-logo.svg"/>
+<img src="https://raw.githubusercontent.com/alexaubry/docker-swift-apns/master/.github/apns-logo.png" width="181" height="181"/>
 
 # Swift APNS for Docker
 
