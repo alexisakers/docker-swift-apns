@@ -3,18 +3,29 @@ sudo: required
 dist: trusty
 
 env:
-    - CURL="7.54.0" HTTP2="v1.22.0" SWIFT="3.0.2" TAG="aleksaubry/swift-apns:3.0.2" TEST_TAG="aleksaubry\/swift-apns:3.0.2"
-    - CURL="7.54.0" HTTP2="v1.22.0" SWIFT="3.1.0" TAG="aleksaubry/swift-apns:3.1.0" TEST_TAG="aleksaubry\/swift-apns:3.1.0"
+    global:
+        - LOCAL_SWIFT_BRANCH="swift-4.0-branch"
+        - LOCAL_SWIFT_VERSION="swift-4.0-DEVELOPMENT-SNAPSHOT-2017-07-24-a"
+    matrix:
+        # Swift 3.0.2
+        - CURL="7.54.0" HTTP2="v1.22.0" SWIFT_BRANCH="swift-3.0.2-release" SWIFT_VERSION="swift-3.0.2-RELEASE" TAG="aleksaubry/swift-apns:3.0.2"
+        # Swift 3.1
+        - CURL="7.54.0" HTTP2="v1.22.0" SWIFT_BRANCH="swift-3.1-release" SWIFT_VERSION="swift-3.1-RELEASE" TAG="aleksaubry/swift-apns:3.1.0" 
+        # Swift 3.1.1
+        - CURL="7.54.1" HTTP2="v1.24.0" SWIFT_BRANCH="swift-3.1.1-release" SWIFT_VERSION="swift-3.1.1-RELEASE" TAG="aleksaubry/swift-apns:3.1.1"
+        # Swift 4.0 beta 4
+        - CURL="7.54.1" HTTP2="v1.24.0" SWIFT_BRANCH="swift-4.0-branch" SWIFT_VERSION="swift-4.0-DEVELOPMENT-SNAPSHOT-2017-07-24-a" TAG="aleksaubry/swift-apns:4.0-beta.4"
 
 install:
     - bash ./.ci/install.sh
 
 script:
-    - docker-swift-apns build --curl=$CURL --nghttp2=$HTTP2 --swift=$SWIFT --tag=$TAG
+    - ~/docker-swift-apns build --curl=$CURL --nghttp2=$HTTP2 --swift-branch=$SWIFT_BRANCH --swift-version=$SWIFT_VERSION --tag=$TAG
     - bash ./.ci/test-suite.sh
     
 deploy:
     provider: script
     script: bash ./.ci/release.sh
+    skip_cleanup: true
     on:
         branch: release

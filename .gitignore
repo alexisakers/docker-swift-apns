@@ -6,6 +6,5 @@
 Packages
 
 # Build Artifacts
-./Dockerfile
-Dockerfile-e
+docker-swift-apns
 Package.pins

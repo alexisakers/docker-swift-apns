@@ -10,44 +10,39 @@ These images are compatible with any environment supporting Docker, including [H
 
 ## Contents
 
-- Swift (based on the [official Docker image](https://hub.docker.com/_/swift/))
+Each image comes with:
+
+- Ubuntu 16.04
+- The full Swift toolchain
 - `libcurl` compiled with HTTP/2 support
 
-## Images
+## Supported Images
 
-| Image Tag                   | Swift | libcurl | libnghttp2 |
-|-----------------------------|-------|---------|------------|
-| aleksaubry/swift-apns:3.0.2 | 3.0.2 | 7.54.0  | 1.22.0     |
-| aleksaubry/swift-apns:3.1.0 | 3.1.0 | 7.54.0  | 1.22.0     |
+| Image Tag                        | Swift      | libcurl | libnghttp2 |
+|----------------------------------|------------|---------|------------|
+| aleksaubry/swift-apns:3.0.2      | 3.0.2      | 7.54.0  | 1.22.0     |
+| aleksaubry/swift-apns:3.1.0      | 3.1.0      | 7.54.0  | 1.22.0     |
+| aleksaubry/swift-apns:3.1.1      | 3.1.1      | 7.54.1  | 1.24.0     |
+| aleksaubry/swift-apns:4.0-beta.4 | 4.0 beta 4 | 7.54.1  | 1.24.0     |
 
-&#x1F30E;  You can visit the project's Docker Hub repo here: https://hub.docker.com/r/aleksaubry/swift-apns/ 
+&#x1F6E3;  [Support Roadmap](ROADMAP.md)
+
+&#x1F30E;  Please visit the project's [Docker Hub repo](https://hub.docker.com/r/aleksaubry/swift-apns/) for a full list of tags.
 
 ## Docker Instructions
 
-Getting started with the Swift APNS images is very easy!
+Swift APNS allows you to create Docker containers for your APNS provider server.
 
-Just set an image tag listed above to the base image in your project's Dockerfile:
+All you have to do to get started is specify one of the images listed above as your container's base image at the top of its `Dockerfile`:
 
 ```dockerfile
 FROM aleksaubry/swift-apns:<version>
 ```
 
-&#x1F4D6;  More guides are available in the [Wiki](https://github.com/alexaubry/docker-swift-apns/wiki).
-
-## Contributing
-
-Contributions are very welcome and appreciated! Please submit your pull requests to the `master` branch.
+&#x1F4D6;  More guides and tutorials are available in the [Wiki](https://github.com/alexaubry/docker-swift-apns/wiki).
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE.md).
-
-## Acknowledgements
-
-This project uses other great open-source libraries:
-
-- [Files](https://github.com/JohnSundell/Files) by **@johnsundell**
-- [ShellOut](https://github.com/JohnSundell/ShellOut) by **@johnsundell**
-- [Marathon](https://github.com/JohnSundell/Marathon) by **@johnsundell**
 
 &#x1F433;

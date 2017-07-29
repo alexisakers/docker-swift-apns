@@ -1,5 +1,4 @@
 import Foundation
-import Files
 
 // MARK: Utilities
 
@@ -16,13 +15,13 @@ extension String {
             return nil
         }
 
-        let flagName = self[flagMarkerRange.upperBound ..< assignmentOperatorRange.lowerBound]
+        let flagName = substring(with: flagMarkerRange.upperBound ..< assignmentOperatorRange.lowerBound)
 
         guard flagName == flag else {
             return nil
         }
 
-        return self[assignmentOperatorRange.upperBound ..< endIndex]
+        return substring(with: assignmentOperatorRange.upperBound ..< endIndex)
 
     }
 
@@ -110,9 +109,12 @@ struct BuildArguments {
     /// The version of libnghttp2 to vendor.
     let nghttp2Version: String
     
-    /// The version of Swift to use.
+    /// The Swift branch to use.
+    let swiftBranch: String
+
+    /// The Swift version to use.
     let swiftVersion: String
-    
+
     /// The Docker tag to associate with the built image.
     let imageTag: String
     
@@ -126,7 +128,7 @@ extension CommandLine {
     /// Get the build arguments from argv.
     static func parseArguments() throws -> BuildArguments {
 
-        guard arguments.count >= 6 else {
+        guard arguments.count >= 7 else {
             throw BuildError.invalidArguments
         }
 
@@ -138,8 +140,9 @@ extension CommandLine {
 
         let curlVersionFlag = arguments[2]
         let nghttp2VersionFlag = arguments[3]
-        let swiftVersionFlag = arguments[4]
-        let imageTagFlag = arguments[5]
+        let swiftBranchFlag = arguments[4]
+        let swiftVersionFlag = arguments[5]
+        let imageTagFlag = arguments[6]
 
         guard let curlVersion = curlVersionFlag.value(forFlag: "curl") else {
             throw BuildError.invalidArgument(curlVersionFlag)
@@ -149,7 +152,11 @@ extension CommandLine {
             throw BuildError.invalidArgument(nghttp2VersionFlag)
         }
 
-        guard let swiftVersion = swiftVersionFlag.value(forFlag: "swift") else {
+        guard let swiftBranch = swiftBranchFlag.value(forFlag: "swift-branch") else {
+            throw BuildError.invalidArgument(swiftVersionFlag)
+        }
+
+        guard let swiftVersion = swiftVersionFlag.value(forFlag: "swift-version") else {
             throw BuildError.invalidArgument(swiftVersionFlag)
         }
 
@@ -159,6 +166,7 @@ extension CommandLine {
 
         return BuildArguments(curlVersion: curlVersion,
                               nghttp2Version: nghttp2Version,
+                              swiftBranch: swiftBranch,
                               swiftVersion: swiftVersion,
                               imageTag: imageTag)
 
@@ -167,23 +175,26 @@ extension CommandLine {
     /// Prints the usage of the script.
     static func printUsage() {
 
-        print()
-        print("Available commands:")
-        print()
+        let usage =
+        """
 
-        print("\t build \t Build a swift-apns Docker image")
+        Available commands:
 
-        print()
-        print("Required parameters:")
-        print()
+        \t build \t Build a swift-apns Docker image
 
-        print("\t --curl=<curl version> \t The version of libcurl to bundle in the image")
-        print("\t --nghttp2=<nghttp2 version> \t The version of libnghttp2 to bundle in the image")
-        print("\t --swift=<swift version> \t The version of the Swift language to bundle in the image")
-        print("\t --tag=<image tag> \t The tag to use to identify the image")
+        Required parameters:
 
-        print()
-        print("🌍  For more information, visit https://github.com/alexaubry/swift-apns-docker")
+        \t --curl=<curl version> \t The version of libcurl to bundle in the image
+        \t --nghttp2=<nghttp2 version> \t The version of libnghttp2 to bundle in the image
+        \t --swift-branch=<swift branch> \t The branch to the Swift version to bundle in the image
+        \t --swift-version=<swift version> \t The version of the Swift language to bundle in the image"
+        \t --tag=<image tag> \t The tag to use to identify the image
+
+        🌍  For more information, visit https://github.com/alexaubry/swift-apns-docker
+        """
+
+        print(usage)
+
 
     }
 
@@ -224,24 +235,6 @@ extension CommandLine {
 
 // MARK: - Dockerfile
 
-/// Creates a Dockerfile appropriate for the specified build arguments.
-func createDockerfile(in workingDirectory: Folder,
-                      with arguments: BuildArguments) throws -> File {
-
-    let template = try workingDirectory.file(named: "DockerfileTemplate")
-
-    var body = try template.readAsString()
-    body = body.replacingOccurrences(of: "{CURL_VERSION}", with: arguments.curlVersion)
-    body = body.replacingOccurrences(of: "{HTTP2_VERSION}", with: arguments.nghttp2Version)
-    body = body.replacingOccurrences(of: "{SWIFT_VERSION}", with: arguments.swiftVersion)
-
-    let dockerfile = try workingDirectory.createFileIfNeeded(withName: "Dockerfile")
-    try dockerfile.write(string: body)
-
-    return dockerfile
-
-}
-
 /// Executes a bash command and throws on failure.
 func execute(bashCommand: String, arguments: [String]) throws {
 
@@ -275,20 +268,19 @@ func execute(bashCommand: String, arguments: [String]) throws {
 do {
 
     let buildArgs = try CommandLine.parseArguments()
-    let workingDirectory = FileSystem().currentFolder
     let imageName = buildArgs.imageTag
-
-    print("👉  Creating Dockerfile")
-    let dockerFile = try createDockerfile(in: workingDirectory, with: buildArgs)
 
     print("👉  Building Docker image '\(imageName)'")
 
     try execute(bashCommand: "docker",
-                arguments: ["build", ".", "-t", buildArgs.imageTag]) 
+                arguments: ["build", ".",
+                            "-t", imageName,
+                            "--build-arg", "SWIFT_BRANCH=\(buildArgs.swiftBranch)",
+                            "--build-arg", "SWIFT_VERSION=\(buildArgs.swiftVersion)",
+                            "--build-arg", "HTTP2_VERSION=\(buildArgs.nghttp2Version)",
+                            "--build-arg", "CURL_VERSION=\(buildArgs.curlVersion)"])
 
-    try dockerFile.delete()
-
-    print("✅  Swift APNS image '\(imageName)' built successfully!")
+    print("✅  Swift APNS image '\(imageName)' was built successfully!")
 
 } catch {
     CommandLine.fail(error: error)
