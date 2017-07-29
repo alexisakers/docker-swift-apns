@@ -2,6 +2,7 @@
 set -e
 
 echo "👉  Building Test Image"
+TEST_TAG=$(echo "$TAG" | sed -e 's,/,\\\/,g')
 sed -i -e "s/{IMAGE_TAG}/$TEST_TAG/g" TestSuite/Dockerfile
 docker build TestSuite -t tests
 
