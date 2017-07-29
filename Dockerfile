@@ -64,8 +64,8 @@ ENV SWIFT_PLATFORM=$SWIFT_PLATFORM \
 
 # https://github.com/swiftdocker/docker-swift/blob/ef9aa534705fc8ab4258c539f6304072ebae9613/Dockerfile
 RUN SWIFT_URL=https://swift.org/builds/$SWIFT_BRANCH/$(echo "$SWIFT_PLATFORM" | tr -d .)/$SWIFT_VERSION/$SWIFT_VERSION-$SWIFT_PLATFORM.tar.gz \
-    && curl -fSsL $SWIFT_URL -o swift.tar.gz \
-    && curl -fSsL $SWIFT_URL.sig -o swift.tar.gz.sig \
+    && curl -L $SWIFT_URL -o swift.tar.gz \
+    && curl -L $SWIFT_URL.sig -o swift.tar.gz.sig \
     && export GNUPGHOME="$(mktemp -d)" \
     && set -e; \
         for key in \
