@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "👉  Building Image"
+~/docker-swift-apns build --curl=$CURL --nghttp2=$HTTP2 --swift-branch=$SWIFT_BRANCH --swift-version=$SWIFT_VERSION --tag=$TAG
+
 echo "👉  Building Test Image"
 TEST_TAG=$(echo "$TAG" | sed -e 's,/,\\\/,g')
 sed -i -e "s/{IMAGE_TAG}/$TEST_TAG/g" Tests/Dockerfile

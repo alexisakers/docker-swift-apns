@@ -20,8 +20,7 @@ install:
     - bash ./.ci/install.sh
 
 script:
-    - ~/docker-swift-apns build --curl=$CURL --nghttp2=$HTTP2 --swift-branch=$SWIFT_BRANCH --swift-version=$SWIFT_VERSION --tag=$TAG
-    - bash ./.ci/tests.sh
+    - bash ./.ci/build.sh
     
 deploy:
     provider: script
