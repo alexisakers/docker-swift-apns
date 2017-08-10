@@ -73,7 +73,7 @@ RUN SWIFT_URL=https://swift.org/builds/$SWIFT_BRANCH/$(echo "$SWIFT_PLATFORM" | 
     && curl -L $SWIFT_URL.sig -o swift.tar.gz.sig \
     && gpg --verify swift.tar.gz.sig \
     && tar -xzf swift.tar.gz --directory /usr/local --strip-components=2 \
-    && rm -r "$GNUPGHOME" swift.tar.gz.sig swift.tar.gz
+    && rm -r swift.tar.gz.sig swift.tar.gz
 
 # Fix CoreFoundation file permission error
 RUN find /usr/local/lib/swift/CoreFoundation -type f -exec chmod 644 {} \;
