@@ -1,14 +1,10 @@
-// swift-tools-version:4.0
+// swift-tools-version:3.0
 
 import PackageDescription
 
 let package = Package(
     name: "ImageTools",
     dependencies: [
-        .package(url: "https://github.com/boostcode/CCurl.git", from: "0.2.0")
-    ],
-    targets: [
-        .target(name: "ImageTools"),
-        .testTarget(name: "ImageTests", dependencies: ["ImageTools"])
+        .Package(url: "https://github.com/boostcode/CCurl.git", majorVersion: 0, minor: 2)
     ]
 )

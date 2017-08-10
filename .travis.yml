@@ -5,7 +5,7 @@ dist: trusty
 env:
     global:
         - LOCAL_SWIFT_BRANCH="swift-4.0-branch"
-        - LOCAL_SWIFT_VERSION="swift-4.0-DEVELOPMENT-SNAPSHOT-2017-07-24-a"
+        - LOCAL_SWIFT_VERSION="swift-4.0-DEVELOPMENT-SNAPSHOT-2017-08-04-a"
     matrix:
         # Swift 3.0.2
         - CURL="7.54.0" HTTP2="v1.22.0" SWIFT_BRANCH="swift-3.0.2-release" SWIFT_VERSION="swift-3.0.2-RELEASE" TAG="aleksaubry/swift-apns:3.0.2"
@@ -20,8 +20,7 @@ install:
     - bash ./.ci/install.sh
 
 script:
-    - ~/docker-swift-apns build --curl=$CURL --nghttp2=$HTTP2 --swift-branch=$SWIFT_BRANCH --swift-version=$SWIFT_VERSION --tag=$TAG
-    - bash ./.ci/tests.sh
+    - bash ./.ci/build.sh
     
 deploy:
     provider: script

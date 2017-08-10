@@ -15,13 +15,14 @@ extension String {
             return nil
         }
 
-        let flagName = substring(with: flagMarkerRange.upperBound ..< assignmentOperatorRange.lowerBound)
+        let flagName = self[flagMarkerRange.upperBound ..< assignmentOperatorRange.lowerBound]
 
         guard flagName == flag else {
             return nil
         }
 
-        return substring(with: assignmentOperatorRange.upperBound ..< endIndex)
+        let value = self[assignmentOperatorRange.upperBound ..< endIndex]
+        return String(value)
 
     }
 

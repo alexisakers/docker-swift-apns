@@ -26,6 +26,11 @@ RUN apt-get -q update && \
 
 RUN mkdir /dependencies
 
+# Install GPG keys
+RUN wget -q -O - https://swift.org/keys/all-keys.asc | \
+  gpg --import - \
+  && export GNUPGHOME="$(mktemp -d)"
+
 # Build libnghttp2
 ARG HTTP2_VERSION
 
@@ -52,7 +57,7 @@ RUN cd /dependencies && \
     make && \
     make install && \
     ldconfig
-    
+
 # Install Swift
 ARG SWIFT_PLATFORM=ubuntu16.04
 ARG SWIFT_BRANCH
@@ -66,18 +71,9 @@ ENV SWIFT_PLATFORM=$SWIFT_PLATFORM \
 RUN SWIFT_URL=https://swift.org/builds/$SWIFT_BRANCH/$(echo "$SWIFT_PLATFORM" | tr -d .)/$SWIFT_VERSION/$SWIFT_VERSION-$SWIFT_PLATFORM.tar.gz \
     && curl -L $SWIFT_URL -o swift.tar.gz \
     && curl -L $SWIFT_URL.sig -o swift.tar.gz.sig \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && set -e; \
-        for key in \
-            7463A81A4B2EEA1B551FFBCFD441C977412B37AD \
-            1BE1E29A084CB305F397D62A9F597F4D21A56D5F \
-            A3BAFD3556A59079C06894BD63BC1CFE91D306C6 \
-        ; do \
-            gpg --quiet --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
-        done \
-    && gpg --batch --verify --quiet swift.tar.gz.sig swift.tar.gz \
+    && gpg --verify swift.tar.gz.sig \
     && tar -xzf swift.tar.gz --directory /usr/local --strip-components=2 \
-    && rm -r "$GNUPGHOME" swift.tar.gz.sig swift.tar.gz
+    && rm -r swift.tar.gz.sig swift.tar.gz
 
 # Fix CoreFoundation file permission error
 RUN find /usr/local/lib/swift/CoreFoundation -type f -exec chmod 644 {} \;
