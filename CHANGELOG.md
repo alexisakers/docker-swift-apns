@@ -4,6 +4,8 @@
 
 - Release Swift 4.0 beta 5 image
 - Deprecate Swift 4.0 beta 4 image
+- Migrate tests to Swift 4
+- Fix version comparison in tests
 
 ## v2.0 — July 29, 2017
 

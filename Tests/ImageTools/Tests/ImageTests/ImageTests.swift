@@ -1,6 +1,6 @@
 import XCTest
 import CCurl
-@testable import TestSuite
+@testable import ImageTools
 
 ///
 /// Tests the integrity of the image.
@@ -9,10 +9,11 @@ import CCurl
 class ImageTests: XCTestCase {
 
     let imageTools = ImageTools()
-
+    let minimumCURLVersion = Version(major: 7, minor: 51, patch: 0)
+    
     /// Checks that libcurl has a version equal or greater than 7.51.0.
     func testCURLVersion() {
-        XCTAssertTrue(imageTools.cURLVersion >= "7.51.0")
+        XCTAssertTrue(imageTools.cURLVersion >= minimumCURLVersion)
     }
 
     /// Checks that libcurl supports HTTP/2.
@@ -30,7 +31,11 @@ class ImageTests: XCTestCase {
         }
 
         let url = "https://nghttp2.org"
-        curlHelperSetOptString(curlHandle, CURLOPT_URL, url)
+        
+        url.withMutableCString {
+            curlHelperSetOptString(curlHandle, CURLOPT_URL, $0)
+        }
+
         curlHelperSetOptInt(curlHandle, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_0)
 
         var resultData = CURLWriteStorage()
@@ -55,7 +60,7 @@ class ImageTests: XCTestCase {
         let responseBody = String(bytes: resultData.data, encoding: .utf8)!
 
         XCTAssertEqual(result, CURLE_OK)
-        XCTAssertTrue(responseBody.contains("HTTP/2"))
+        XCTAssertTrue(responseBody.hasPrefix("HTTP/2 200"))
 
     }
 

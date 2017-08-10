@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CCurl",
+        "repositoryURL": "https://github.com/boostcode/CCurl.git",
+        "state": {
+          "branch": null,
+          "revision": "c78d0235858efccc5c4f47b38ec09ab0270e799b",
+          "version": "0.3.7"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
