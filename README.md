@@ -23,7 +23,7 @@ Each image comes with:
 | aleksaubry/swift-apns:3.0.2      | 3.0.2      | 7.54.0  | 1.22.0     |
 | aleksaubry/swift-apns:3.1.0      | 3.1.0      | 7.54.0  | 1.22.0     |
 | aleksaubry/swift-apns:3.1.1      | 3.1.1      | 7.54.1  | 1.24.0     |
-| aleksaubry/swift-apns:4.0-beta.5 | 4.0 beta 5 | 7.55.0  | 1.24.0     |
+| aleksaubry/swift-apns:4.0        | 4.0        | 7.55.1  | 1.25.0     |
 
 &#x1F6E3;  [Support Roadmap](ROADMAP.md)
 
@@ -41,8 +41,14 @@ FROM aleksaubry/swift-apns:<version>
 
 &#x1F4D6;  More guides and tutorials are available in the [Wiki](https://github.com/alexaubry/docker-swift-apns/wiki).
 
+## Authors
+
+Alexis Aubry, me@alexaubry.fr
+
+You can find me on Twitter: [@_alexaubry](https://twitter.com/_alexaubry)
+
 ## License
 
-This project is licensed under the [MIT License](LICENSE.md).
+This project is available under the MIT License. See [LICENSE](LICENSE) for more information.
 
 &#x1F433;
