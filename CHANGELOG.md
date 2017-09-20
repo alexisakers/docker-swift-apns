@@ -3,6 +3,8 @@
 ## v2.0.2 - September 20, 2017
 
 - Add Swift 4 image
+- Improve README
+- Use Swift 4 release version in CI
 - Deprecate Swift 4.0 beta 5 image
 
 ## v2.0.1 - August 10, 2017

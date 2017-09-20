@@ -41,8 +41,14 @@ FROM aleksaubry/swift-apns:<version>
 
 &#x1F4D6;  More guides and tutorials are available in the [Wiki](https://github.com/alexaubry/docker-swift-apns/wiki).
 
+## Authors
+
+Alexis Aubry, me@alexaubry.fr
+
+You can find me on Twitter: [@_alexaubry](https://twitter.com/_alexaubry)
+
 ## License
 
-This project is licensed under the [MIT License](LICENSE.md).
+This project is available under the MIT License. See [LICENSE](LICENSE) for more information.
 
 &#x1F433;
