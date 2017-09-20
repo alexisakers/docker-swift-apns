@@ -1,5 +1,9 @@
 # Updates to Swift APNS for Docker
 
+## v2.0.2 - September 20, 2017
+
+- Deprecate Swift 4.0 beta 5 image
+
 ## v2.0.1 - August 10, 2017
 
 - Release Swift 4.0 beta 5 image

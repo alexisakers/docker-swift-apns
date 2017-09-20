@@ -13,10 +13,10 @@ Please note that curl and ngttp2 will not be updated after the release of the im
 | aleksaubry/swift-apns:3.0.2      | December 13, 2017      |
 | aleksaubry/swift-apns:3.1.0      | March 27, 2018         |
 | aleksaubry/swift-apns:3.1.1      | April 21, 2018         |
-| aleksaubry/swift-apns:4.0-beta.5 | Next beta / GM release |
 
 ## Deprecated Images
 
 | Image Tag                        | Support ended          |
 |----------------------------------|------------------------|
 | aleksaubry/swift-apns:4.0-beta.4 | August 10 2017         |
+| aleksaubry/swift-apns:4.0-beta.5 | September 19 2017      |
