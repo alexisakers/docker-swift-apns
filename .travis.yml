@@ -27,4 +27,4 @@ deploy:
     script: bash ./.ci/release.sh
     skip_cleanup: true
     on:
-        branch: release
+        tags: true
