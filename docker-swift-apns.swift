@@ -6,7 +6,6 @@ extension String {
 
     /// Extracts the value in the flag.
     func value(forFlag flag: String) -> String? {
-
         guard let flagMarkerRange = range(of: "--") else {
             return nil
         }
@@ -23,7 +22,6 @@ extension String {
 
         let value = self[assignmentOperatorRange.upperBound ..< endIndex]
         return String(value)
-
     }
 
 }
@@ -54,7 +52,6 @@ enum BuildError: Error {
 
     /// The message to print.
     var message: String {
-
         switch self {
         case .invalidArguments:
             return "The arguments passed to the command line are not valid."
@@ -67,33 +64,27 @@ enum BuildError: Error {
 
         case .dockerError:
             return "The Docker daemon returned an error."
-
         }
-
     }
 
     /// Whether the script should print the CLI usage on failure.
     var shouldPrintUsage: Bool {
-
         switch self {
-        case .dockerError(_):
+        case .dockerError:
             return false
         default:
             return true
         }
-
     }
 
     /// Additionnal logging informations for debugging.
     var log: String? {
-
         switch self {
         case .dockerError(let log):
             return log
         default:
             return nil
         }
-
     }
 
 }
@@ -121,14 +112,12 @@ struct BuildArguments {
     
 }
 
-
 // MARK: - CLI
 
 extension CommandLine {
 
     /// Get the build arguments from argv.
     static func parseArguments() throws -> BuildArguments {
-
         guard arguments.count >= 7 else {
             throw BuildError.invalidArguments
         }
@@ -170,12 +159,10 @@ extension CommandLine {
                               swiftBranch: swiftBranch,
                               swiftVersion: swiftVersion,
                               imageTag: imageTag)
-
     }
 
     /// Prints the usage of the script.
     static func printUsage() {
-
         let usage =
         """
 
@@ -195,13 +182,10 @@ extension CommandLine {
         """
 
         print(usage)
-
-
     }
 
     /// Prints an error and exit with a 1 code.
     static func fail(error: Error) {
-
         var shouldPrintUsage = true
         var message = "Unknown error (\(error.localizedDescription))"
         var log: String? = nil
@@ -228,7 +212,6 @@ extension CommandLine {
         }
 
         exit(1)
-
     }
 
 }
@@ -238,7 +221,6 @@ extension CommandLine {
 
 /// Executes a bash command and throws on failure.
 func execute(bashCommand: String, arguments: [String]) throws {
-
     let args = arguments.joined(separator: " ")
     let command = "cd . && \(bashCommand) \(args)"
     let process = Process()
@@ -260,14 +242,12 @@ func execute(bashCommand: String, arguments: [String]) throws {
     if let error = standardErrorPipe.readText() {
         throw BuildError.dockerError(error)
     }
-
 }
 
 
 // MARK: - Script
 
 do {
-
     let buildArgs = try CommandLine.parseArguments()
     let imageName = buildArgs.imageTag
 
@@ -282,7 +262,6 @@ do {
                             "--build-arg", "CURL_VERSION=\(buildArgs.curlVersion)"])
 
     print("✅  Swift APNS image '\(imageName)' was built successfully!")
-
 } catch {
     CommandLine.fail(error: error)
 }

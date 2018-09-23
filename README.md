@@ -18,12 +18,12 @@ Each image comes with:
 
 ## Supported Images
 
-| Image Tag                        | Swift      | libcurl | libnghttp2 |
-|----------------------------------|------------|---------|------------|
-| aleksaubry/swift-apns:4.0        | 4.0        | 7.55.1  | 1.25.0     |
-| aleksaubry/swift-apns:4.0.2      | 4.0.2      | 7.56.1  | 1.27.0     |
-| aleksaubry/swift-apns:4.0.3      | 4.0.3      | 7.57.0  | 1.28.0     |
-| aleksaubry/swift-apns:4.1        | 4.1        | 7.59.0  | 1.31.0     |
+| Image Tag                              | Swift  | libcurl  | libnghttp2 |
+|----------------------------------|--------|---------|-------------|
+| aleksaubry/swift-apns:4.0.2   | 4.0.2  | 7.56.1  | 1.27.0      |
+| aleksaubry/swift-apns:4.0.3   | 4.0.3  | 7.57.0  | 1.28.0      |
+| aleksaubry/swift-apns:4.1      | 4.1     | 7.59.0  | 1.31.0      |
+| aleksaubry/swift-apns:4.2      | 4.2     | 7.61.1  | 1.33.0      |
 
 &#x1F6E3;  [Support Roadmap](ROADMAP.md)
 
