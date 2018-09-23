@@ -10,10 +10,10 @@ Please note that curl and ngttp2 will not be updated after the release of the im
 
 | Image Tag | End of support |
 |-----------|----------------|
-| aleksaubry/swift-apns:4.0.2 | November 1, 2018 |
-| aleksaubry/swift-apns:4.0.3 | December 5, 2018 |
-| aleksaubry/swift-apns:4.1 | March 28, 2019 |
 | aleksaubry/swift-apns:4.2 | September 17, 2019 |
+| aleksaubry/swift-apns:4.1 | March 28, 2019 |
+| aleksaubry/swift-apns:4.0.3 | December 5, 2018 |
+| aleksaubry/swift-apns:4.0.2 | November 1, 2018 |
 
 ## Deprecated Images
 
