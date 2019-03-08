@@ -20,10 +20,12 @@ Each image comes with:
 
 | Image Tag                              | Swift  | libcurl  | libnghttp2 |
 |----------------------------------|--------|---------|-------------|
+| aleksaubry/swift-apns:5.0-beta.306      | 5.0 (03/06/19 snapshot)     | 7.64.0  | 1.36.0      |
+| aleksaubry/swift-apns:4.2.3      | 4.2.3     | 7.64.0  | 1.36.0      |
+| aleksaubry/swift-apns:4.2.2      | 4.2.2     | 7.64.0  | 1.36.0      |
+| aleksaubry/swift-apns:4.2.1      | 4.2.1     | 7.64.0  | 1.36.0      |
 | aleksaubry/swift-apns:4.2      | 4.2     | 7.61.1  | 1.33.0      |
 | aleksaubry/swift-apns:4.1      | 4.1     | 7.59.0  | 1.31.0      |
-| aleksaubry/swift-apns:4.0.3   | 4.0.3  | 7.57.0  | 1.28.0      |
-| aleksaubry/swift-apns:4.0.2   | 4.0.2  | 7.56.1  | 1.27.0      |
 
 &#x1F6E3;  [Support Roadmap](ROADMAP.md)
 
