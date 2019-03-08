@@ -1,0 +1,15 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+  LOCAL_SWIFT_BRANCH: 'swift-4.2-release'
+  LOCAL_SWIFT_VERSION: 'swift-4.2-RELEASE'
+  
+steps:
+- script: bash ./.ci/install.sh
+  displayName: 'Install Swift'
+- script: bash ./.ci/build.sh
+  displayName: 'Build and Test'
