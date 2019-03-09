@@ -6,7 +6,7 @@ pool:
 
 variables:
   LOCAL_SWIFT_BRANCH: 'swift-4.2-release'
-  LOCAL_SWIFT_VERSION: 'swift-4.2-RELEASE'
+  LOCAL_SWIFT_VERSION: 'swift-4.2-RELEASE-ubuntu16.04'
   
 steps:
 - script: bash ./.ci/install.sh

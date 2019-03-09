@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "CCurl",
-        "repositoryURL": "https://github.com/boostcode/CCurl.git",
+        "repositoryURL": "https://github.com/IBM-Swift/CCurl",
         "state": {
           "branch": null,
-          "revision": "2705725c84c1a8f858199ecc5b7ecd7eba2f6fa6",
-          "version": "0.2.4"
+          "revision": "2a431e3a5fb8d004aa7d4d1bebb5d511f568c43e",
+          "version": "1.0.0"
         }
       }
     ]
