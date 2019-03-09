@@ -1,0 +1,46 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+  LOCAL_SWIFT_BRANCH: 'swift-4.2-release'
+  LOCAL_SWIFT_VERSION: 'swift-4.2-RELEASE'
+
+strategy:
+  matrix:
+    # Swift 4.0.2
+    Swift402:
+      CURL: '7.56.1'
+      HTTP2: 'v1.27.0'
+      SWIFT_BRANCH: 'swift-4.0.2-release'
+      SWIFT_VERSION: 'swift-4.0.2-RELEASE'
+      TAG: 'aleksaubry/swift-apns:4.0.2'
+    # Swift 4.0.3
+    Swift403:
+      CURL: '7.57.0'
+      HTTP2: 'v1.28.0'
+      SWIFT_BRANCH: 'swift-4.0.3-release'
+      SWIFT_VERSION: 'swift-4.0.3-RELEASE'
+      TAG: 'aleksaubry/swift-apns:4.0.3'
+    # Swift 4.1.0
+    Swift410:
+      CURL: '7.59.0'
+      HTTP2: 'v1.31.0'
+      SWIFT_BRANCH: 'swift-4.1-release'
+      SWIFT_VERSION: 'swift-4.1-RELEASE'
+      TAG: 'aleksaubry/swift-apns:4.1'
+    # Swift 4.2.0
+    Swift420:
+      CURL: '7.61.1'
+      HTTP2: 'v1.33.0'
+      SWIFT_BRANCH: 'swift-4.2-release'
+      SWIFT_VERSION: 'swift-4.2-RELEASE'
+      TAG: 'aleksaubry/swift-apns:4.2'
+
+steps:
+- script: bash ./.ci/install.sh
+  displayName: 'Install Swift'
+- script: bash ./.ci/build.sh
+  displayName: 'Build and Test'
