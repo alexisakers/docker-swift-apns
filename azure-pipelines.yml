@@ -32,7 +32,7 @@ strategy:
       SWIFT_VERSION: 'swift-4.1-RELEASE'
       TAG: 'aleksaubry/swift-apns:4.1'
     # Swift 4.2.0
-    Swift410:
+    Swift420:
       CURL: '7.61.1'
       HTTP2: 'v1.33.0'
       SWIFT_BRANCH: 'swift-4.2-release'
